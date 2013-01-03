@@ -1,3 +1,4 @@
 git add .
-git commit -m "Checkin in code"
-git push -u origin master
+git add -u
+git commit -am "Commit message"
+git push https://github.com/jarble/downloadedModules

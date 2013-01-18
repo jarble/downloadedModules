@@ -1,11 +1,21 @@
 
 //print the output if the name of a file is entered as a command-line argument.
-if(process.argv.length == 3){
-	checkAllFunctions(process.argv[2]);
-}
 
+if(typeof(process) != 'undefined'){
+	if(process.argv.length == 3){
+		checkAllFunctions(process.argv[2]);
+	}
+}
+	    console.log("To use in the browser, use the enclosing function name (without quotes) as the first parameter, and the function to check (with quotes) as the second parameter.")
+	    console.log("    Example: functionChecker.checkAllFunctions(enclosingFunction, 'functionToCheck')\n\n\n");
+	    console.log("To check a specific function, write:\n functionChecker.checkAllFunctions(__filename, 'functionToCheck');")
+	    console.log("To check the contents of a function or object, don't surround the second parameter in quotes.");
+	    console.log("To check a specific function inside a function, use a third parameter to specify the function.");
+		
 //This function works for either file names or function names as parameters.
-function checkAllFunctions(filename){
+define('functionChecker', ['getAllDefinedFunctions'], function(getAllDefinedFunctions){
+return {
+checkAllFunctions : function(filename, functionToCheck){
 //This is a function checker for hierarchies of unimplemented functions. I use this script for all of my projects,
 //and it has saved me hours of work!
 //It will automatically tell you which functions can be implemented, given a series of comments above each function.
@@ -23,6 +33,9 @@ function checkAllFunctions(filename){
 //is defined: true
 //description: do some stuff
 
+if(functionToCheck != undefined){
+	console.log("Check the function " + functionToCheck);
+}
 
 var s;
 var functionsList = new Array();
@@ -115,7 +128,12 @@ function stuff2(){
 			}
 		}
 	}
-	implementsTheInterface(getAllFunctions());
+	if(functionToCheck != undefined){
+		implementsTheInterface(eval(functionToCheck));
+	}
+	else{
+		implementsTheInterface(getAllFunctions());
+	}
 	//console.log("\n\n\n" + getFunctionInformation + "\n\n\n"); //this 
 	//use implementsTheInterface here
 	//create functions from the first element of each array
@@ -181,6 +199,16 @@ if(typeof filename == "function"){
 	array = filename.toString().split("\n");
 	//console.log(array);
 }
+if(typeof filename == "object"){
+	var newString;
+	for(var key in filename) {
+		newString += filename[key];
+		//alert(filename[key]);
+	}
+	//console.log(newString);
+	array = newString.split("\n");
+	//console.log(array);
+}
 	for(var i = 0; i < array.length; i++){
 		array[i] = array[i].trim();
 	}
@@ -239,7 +267,7 @@ function implementsTheInterface(theFunction, writeStuff) {
 		}
         writeMessage(aMessage);
     }
-    //(t>>(18-t%4))*((t+t*(5))>>10|t­) 
+    //(t>>(18-t%4))*((t+t*(5))>>10|t­)﻿
 
     else {
         writeAMessage("\nThe function " + getFunctionLink(theFunction) + "cannot be implemented!");
@@ -373,4 +401,6 @@ function writeMessage(message) { //fix this so that it works with node.js
     }
 }
 }
-exports.checkAllFunctions = checkAllFunctions;
+}
+});
+//exports.checkAllFunctions = checkAllFunctions;

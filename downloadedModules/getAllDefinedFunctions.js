@@ -11,9 +11,9 @@ if(typeof(process) != 'undefined'){
 	    console.log("To check a specific function, write:\n functionChecker.checkAllFunctions(__filename, 'functionToCheck');")
 	    console.log("To check the contents of a function or object, don't surround the second parameter in quotes.");
 	    console.log("To check a specific function inside a function, use a third parameter to specify the function.");
-		
+
 //This function works for either file names or function names as parameters.
-define('functionChecker', ['getAllDefinedFunctions'], function(getAllDefinedFunctions){
+define('getAllDefinedFunctions', function(){
 return {
 checkAllFunctions : function(filename, functionToCheck){
 //This is a function checker for hierarchies of unimplemented functions. I use this script for all of my projects,
@@ -203,7 +203,7 @@ if(typeof filename == "object"){
 	var newString;
 	for(var key in filename) {
 		newString += filename[key];
-		//alert(filename[key]);
+		alert(filename[key]);
 	}
 	//console.log(newString);
 	array = newString.split("\n");
@@ -265,7 +265,7 @@ function implementsTheInterface(theFunction, writeStuff) {
 		if(theFunction.prototype.requiresTheFunctions === undefined){
 			aMessage += "\n//none";
 		}
-        writeMessage(aMessage);
+        //writeMessage(aMessage);
     }
     //(t>>(18-t%4))*((t+t*(5))>>10|t­)﻿
 
@@ -274,7 +274,7 @@ function implementsTheInterface(theFunction, writeStuff) {
     }
 
     if (theFunction == undefined) {
-        writeAMessage("The function is undefined!");
+        //writeAMessage("The function is undefined!");
     }
 
     if (theFunction.prototype.isDefined == undefined) {
@@ -287,7 +287,7 @@ function implementsTheInterface(theFunction, writeStuff) {
     //writeMessage("reqfun.length is " + reqFun.length);
 
     if (reqFun == undefined) {
-        writeAMessage(getFunctionLink(theFunction)+".prototype.requiresTheFunctions is undefined! Please give it a value!");
+        //writeAMessage(getFunctionLink(theFunction)+".prototype.requiresTheFunctions is undefined! Please give it a value!");
     } else if (reqFun == false) {
         //writeMessage("The function " + getFunctionLink(theFunction) + " does not require any functions. <br />");	
     } else {
@@ -332,8 +332,8 @@ function implementsTheInterface(theFunction, writeStuff) {
     } else {
         //writeMessage("The value of the doStuff.prototype.parameterTypes is " + doStuff.prototype.requiresTheFunctions);
         if (theFunction.prototype.regexArray != undefined) {
-            writeAMessage("The regex and regex array are both implemented for this function: " + getFunctionLink(theFunction) + "<br/>");
-            writeAMessage("Check to see whether the regexes match the strings. Use an external function. <br />");
+            //writeAMessage("The regex and regex array are both implemented for this function: " + getFunctionLink(theFunction) + "<br/>");
+            //writeAMessage("Check to see whether the regexes match the strings. Use an external function. <br />");
             //use regexesMatchStringsInSameOrder
         }
     }
@@ -357,7 +357,7 @@ function canBeImplemented(theFunction) {
     var functionName = getFunctionName(theFunction);
     var funs = theFunction.prototype.requiresTheFunctions;
     if (theFunction.prototype.isDefined == true) {
-        //writeMessage("The function " + functionName + " is already implemented!");
+        writeMessage("The function " + functionName + " is already implemented!");
         return false;
     }
     if (funs == undefined) {

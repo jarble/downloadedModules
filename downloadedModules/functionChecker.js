@@ -13,7 +13,7 @@ if(typeof(process) != 'undefined'){
 	    console.log("To check a specific function inside a function, use a third parameter to specify the function.");
 		
 //This function works for either file names or function names as parameters.
-define('functionChecker', ['getAllDefinedFunctions'], function(getAllDefinedFunctions){
+define('functionChecker', [], function(){
 return {
 checkAllFunctions : function(filename, functionToCheck){
 //This is a function checker for hierarchies of unimplemented functions. I use this script for all of my projects,
